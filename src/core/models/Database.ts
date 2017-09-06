@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as Sqlite3 from 'sqlite3';
 import * as SequelizeStatic from 'sequelize';
 import { Sequelize } from 'sequelize';
-import { configInstance as config } from '../../../config/Config';
+import { configInstance as config } from './../../config/Config';
 import { SequelizeModels } from '../../business/models/SequelizeBusinessModels';
 
 // Construct a sequelize database connection and save state

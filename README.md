@@ -1,17 +1,21 @@
 # Areopoincs Lab 
 ## Runs a grow tent using embedded nodejs on a **raspberry pi**
 
-## Installation 
+## Installation  
+* clone the repo
+* run `npm run start` for full deployment
+* run `npm run test` to execute tests
+* run `npm run build` to build/compile source files
 
 ## Dependencies 
 * Uses onoff package for interacting with the gpio
 
 ## Dev Dependencies
-* Uses typescript 2.4 and above for string enums
-* tests are through mocha and chai
+* Uses typescript 2.4 and above for string enums  
+* tests are through mocha and chai  
 
 ## Configuration
-under config you can change the db and server setup.
+under config you can change the db and server setup.  
 
 ### db_config
 ---

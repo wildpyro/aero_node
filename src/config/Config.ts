@@ -12,7 +12,8 @@ class Config {
     }
 
     private parseDatabaseConfig(): void {
-        let path = './config/db_config.json';
+        //let path = './config/db_config.json'; todo how to fix this to relative path?
+        let path = './tsDist/src/config/db_config.json';
 
         if (fs.existsSync(path)) {
             let data = fs.readFileSync(path, 'utf8');
@@ -24,7 +25,8 @@ class Config {
     }
 
     private parseServerConfig(): void {
-        let path = './config/server_config.json';
+        //let path = './server_config.json';
+        let path = './tsDist/src/config/server_config.json';
 
         if (fs.existsSync(path)) {
             let data = fs.readFileSync(path, 'utf8');

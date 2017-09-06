@@ -2,10 +2,18 @@
   "name": "aero_node",
   "version": "1.0.0",
   "description": "an aeroponics lab using nodejs and a raspberry pi",
-  "main": "tsDist/src/index.js",
+  "main": "tsDist/src/server.js",
   "scripts": {
+    "build": "npm run sass-build && npm run build-static && npm run ts-build && npm run ts-lint",
+    "build-static": "copyfiles src/**/*.html src/**/*.css src/**/*.json tsDist/",
+    "sass-build": "node-sass src/public/css/main.scss dist/public/css/main.css",
+    "sass-watch": "node-sass -w src/public/css/main.scss dist/public/css/main.css",
+    "start": "node tsDist/src/server.js",
     "test": "mocha -r ts-node/register tests/**/*Test.ts",
-    "start": "node tsDist/src/index.js"
+    "ts-build": "tsc",
+    "ts-lint": "tslint -c tslint.json -p tsconfig.json",
+    "ts-watch": "tsc -w",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run sass-watch\" \"npm run ts-watch\" \"npm run start\""
   },
   "keywords": [
     "nodejs",
@@ -20,15 +28,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@types/async": "^2.0.40",
-    "@types/body-parser": "^1.16.3",
-    "@types/chalk": "^0.4.31",
-    "@types/continuation-local-storage": "^3.2.1",
-    "@types/express": "^4.0.36",
-    "@types/node-schedule": "^1.2.0",
-    "@types/onoff": "0.0.27",
-    "@types/sequelize": "^3.4.52",
-    "@types/sqlite3": "^3.1.0",
     "async": "^2.4.1",
     "body-parser": "^1.17.2",
     "chalk": "^1.1.3",
@@ -40,10 +39,22 @@
     "sqlite3": "^3.1.8"
   },
   "devDependencies": {
+    "@types/async": "^2.0.40",
+    "@types/body-parser": "^1.16.3",
     "@types/chai": "^4.0.1",
+    "@types/chalk": "^0.4.31",
+    "@types/continuation-local-storage": "^3.2.1",
+    "@types/express": "^4.0.36",
     "@types/mocha": "^2.2.41",
+    "@types/node-schedule": "^1.2.0",
+    "@types/onoff": "0.0.27",
+    "@types/sequelize": "^3.4.52",
+    "@types/sqlite3": "^3.1.0",
     "chai": "^4.1.0",
+    "concurrently": "^3.5.0",
+    "copyfiles": "^1.2.0",
     "mocha": "^3.4.2",
+    "node-sass": "^4.5.3",
     "ts-node": "^3.3.0"
   }
 }
