@@ -12,6 +12,7 @@
 
 ## Dev Dependencies
 * Uses typescript 2.4 and above for string enums  
+* angular-cli 1.0 and above for UI scaffolding
 * tests are through mocha and chai  
 
 ## Configuration

@@ -8,6 +8,7 @@ import * as fs from 'fs';
 import { database as DatabaseInstance } from './core/models/Database';
 import { ConfigInterface } from './config/interfaces/ConfigInterface';
 import { configInstance } from './config/Config';
+import * as indexRoute from './business/routes/IndexRoute';
 import * as scheduleRoute from './business/routes/ScheduleRoute';
 import * as taskRoute from './business/routes/TaskRoute';
 import * as gpioRoute from './business/routes/GpioRoute';
@@ -60,6 +61,7 @@ class App {
         router = express.Router();
 
         //Add each one of these?
+        indexRoute.route.create(router);
         scheduleRoute.route.create(router);
         taskRoute.route.create(router);
         gpioRoute.route.create(router);
