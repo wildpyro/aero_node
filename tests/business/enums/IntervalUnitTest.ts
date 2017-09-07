@@ -1,5 +1,5 @@
 import * as IntervalUnit from '../../../src/business/enums/IntervalUnit';
-import { expect } from 'chai';
+import { expect } from 'jasmine-core';
 
 describe('Duration Test', function () {
 

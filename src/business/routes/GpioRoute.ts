@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as IndexController from '../controllers/IndexController';
 import { GpioController, GpioControllerInstance } from '../controllers/GpioController';
 
 class GpioRoutes {

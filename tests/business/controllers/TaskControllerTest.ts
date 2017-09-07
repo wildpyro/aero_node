@@ -1,6 +1,6 @@
 import * as cron from 'node-schedule';
 import { TaskController } from '../../../src/business/controllers/TaskController';
-import { expect } from 'chai';
+import { expect } from 'jasmine-core';
 
 describe('Create', function () {
 
