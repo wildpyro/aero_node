@@ -3,13 +3,13 @@
 
 ## Installation  
 * clone the repo
+* run `ng build` to create the angular bundle  
+    Output should be to /dist-angular
+* run `npm run build` to build/compile source files  
+    Source files will be built under /dist
+    All /dist-angular artifacts will be moved as well
 * run `npm run start` for full deployment
 * run `npm run test` to execute tests
-* run `npm run build` to build/compile source files
-
-## Dev Deploy
-* run `ng build` to create the angular bundle
-* move built files to /src/views
 
 ## Dependencies 
 * Uses onoff package for interacting with the gpio
