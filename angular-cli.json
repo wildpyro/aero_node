@@ -5,20 +5,20 @@
   },
   "apps": [
     {
-      "root": "src",
-      "outDir": "dist",
+      "root": "angular",
+      "outDir": "dist-angular",
       "assets": [
-        "./public/assets",
-        "./public/favicon.ico"
+        "./assets",
+        "./favicon.ico"
       ],
-      "index": "./public/index.html",
-      "main": "./public/main.ts",
-      "polyfills": "./public/polyfills.ts",
-      "test": "test.ts",
+      "index": "./index.html",
+      "main": "./main.ts",
+      "polyfills": "./polyfills.ts",
+      "test": "./test.ts",
       "tsconfig": "../tsconfig.json",
       "prefix": "app",
       "styles": [
-        "./public/styles.css"
+        "./styles.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

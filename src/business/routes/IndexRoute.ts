@@ -1,14 +1,17 @@
 import * as express from 'express';
+import * as path from 'path';
 import { Request, Response } from 'express';
 
 class IndexRoutes {
 
     public create(router: express.Router) {
         router.get('/', function (req: Request, res: Response) {
-            res.render('index', {
+            res.sendFile(path.join(__dirname, '../../../public/index.html'));
+
+            /*res.render('index', {
                 user: req.body.user || null,
                 request: req
-            });
+            });*/
 
             //res.send();
         });

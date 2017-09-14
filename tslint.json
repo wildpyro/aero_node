@@ -6,6 +6,7 @@
         "forin": true,
         "indent": [
             false,
+            "spaces",
             4
         ],
         "label-position": true,

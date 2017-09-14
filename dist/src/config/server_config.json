@@ -1,0 +1,10 @@
+{
+    "port": "3000",
+    "session": {
+        "secret": "aero_node",
+        "name": "aero_node",
+        "resave": false,
+        "saveUninitialized": false,
+        "proxy": false
+    }
+}

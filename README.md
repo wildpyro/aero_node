@@ -7,6 +7,10 @@
 * run `npm run test` to execute tests
 * run `npm run build` to build/compile source files
 
+## Dev Deploy
+* run `ng build` to create the angular bundle
+* move built files to /src/views
+
 ## Dependencies 
 * Uses onoff package for interacting with the gpio
 
@@ -16,7 +20,7 @@
 * tests are through mocha and chai  
 
 ## Configuration
-under config you can change the db and server setup.  
+Under ./config you can change the configuration of the server
 
 ### db_config
 ---

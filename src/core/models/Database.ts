@@ -29,8 +29,8 @@ class SequelizeDatabase {
 
     setModels(): void {
 
-        //Need to point to the compiled code because node doesn't support ES6
-        let modelLocation = path.join(process.cwd(), 'tsDist/src/business/schemas');
+        //TODO Need to point to the compiled code because node doesn't support ES6
+        let modelLocation = path.join(process.cwd(), 'dist/src/business/schemas');
 
         fs.readdirSync(modelLocation)
             .filter((file: string) => {

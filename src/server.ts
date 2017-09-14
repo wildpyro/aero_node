@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as async from 'async';
 import * as sequelize from 'sequelize';
 import * as fs from 'fs';
+import { Request, Response } from 'express';
 import { database as DatabaseInstance } from './core/models/Database';
 import { ConfigInterface } from './config/interfaces/ConfigInterface';
 import { configInstance } from './config/Config';
@@ -23,12 +24,14 @@ class App {
     port: number;
     config: ConfigInterface;
 
-    constructor(port: number) {
-        this.port = port;
+    constructor() {
+        this.setConfig();
+        this.port = this.config.serverConfig.port;
         this.express = express();
         this.setBodyParser();
         this.resolveRoutes();
         this.setDBConnection();
+        this.setUIDeployment();
         GpioController.createBasePinLayout();
     }
 
@@ -52,6 +55,14 @@ class App {
         DatabaseInstance.sequelize.sync();
     }
 
+    /**
+     * Set the angular distribution
+     */
+    private setUIDeployment() {
+        this.express.set('view engine', 'html');
+        this.express.use(express.static(path.join(__dirname, '../public')));
+    }
+
 	/**
 	 * initialize all the routes and verify they exist
 	 */
@@ -72,7 +83,8 @@ class App {
 
 async.waterfall([
     function (callback: any) {
-        let app = new App(5000);
+        let app = new App();
+
         callback(null, app);
     },
     function (app: App, callback: any) {

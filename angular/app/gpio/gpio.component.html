@@ -1,0 +1,13 @@
+<p>
+    gpio works!
+</p>
+
+<div id="search-component">
+    <h4>Pin Search</h4>
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+    <div>
+        <div *ngFor="let pin of pinList | async" (click)="gotoDetail(hero)" class="search-result">
+            {{pin.id}} {{pin.pin}} {{pin.scheduleName}}
+        </div>
+    </div>
+</div>
