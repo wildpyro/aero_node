@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Gpio } from './gpio.component.class';
+import { GpioInterface, GpioCollection } from './gpio.component.class';
 import { GpioService } from './gpio.service';
+import { GpioDataSource } from './gpio-data-source';
 
 @Component({
     selector: 'app-gpio',
@@ -13,8 +14,12 @@ import { GpioService } from './gpio.service';
 
 export class GpioComponent implements OnInit {
 
-    pinList: Gpio[];
-    selectedPin: Gpio;
+    pinList: GpioInterface[];
+    selectedPin: GpioInterface;
+
+    gpios = new GpioCollection(null);
+    dataSource: GpioDataSource | null;
+    displayedColumns = ['pin', 'scheduleName'];
 
     constructor(
         private gpioService: GpioService,
@@ -24,7 +29,7 @@ export class GpioComponent implements OnInit {
     getGPIOs(): void {
         this.gpioService
             .getGpios()
-            .then(pinList => this.pinList = pinList);
+            .then(result => this.dataSource = new GpioDataSource(new GpioCollection(result)));
     }
 
     add(name: string): void {
@@ -37,7 +42,7 @@ export class GpioComponent implements OnInit {
             });
     }
 
-    delete(gpio: Gpio): void {
+    delete(gpio: GpioInterface): void {
         this.gpioService
             .delete(gpio.id)
             .then(() => {
@@ -50,12 +55,11 @@ export class GpioComponent implements OnInit {
         this.getGPIOs();
     }
 
-    onSelect(gpio: Gpio): void {
+    onSelect(gpio: GpioInterface): void {
         this.selectedPin = gpio;
     }
 
     gotoDetail(): void {
         this.router.navigate(['/detail', this.selectedPin.id]);
     }
-
 }

@@ -1,54 +1,52 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Gpio } from './gpio.component.class';
+import { GpioInterface } from './gpio.component.class';
 
 @Injectable()
 export class GpioService {
 
-    private headers = new Headers({ 'Content-Type': 'application/json' });
     private gpiosUrl = 'gpio';
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
-    getGpios(): Promise<Gpio[]> {
+    getGpios(): Promise<GpioInterface[]> {
         return this.http.get(this.gpiosUrl)
             .toPromise()
-            .then(response => response.json().data as Gpio[])
+            .then() //do something with it if we want
             .catch(this.handleError);
     }
 
-
-    getGpio(id: number): Promise<Gpio> {
+    getGpio(id: number): Promise<GpioInterface> {
         const url = `${this.gpiosUrl}/${id}`;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as Gpio)
+            .then(response => response)
             .catch(this.handleError);
     }
 
     delete(id: number): Promise<void> {
         const url = `${this.gpiosUrl}/${id}`;
-        return this.http.delete(url, { headers: this.headers })
+        return this.http.delete(url)
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
     }
 
-    create(name: string): Promise<Gpio> {
+    create(name: string): Promise<GpioInterface> {
         return this.http
-            .post(this.gpiosUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .post(this.gpiosUrl, JSON.stringify({ name: name }))
             .toPromise()
-            .then(res => res.json().data as Gpio)
+            .then(response => response as GpioInterface)
             .catch(this.handleError);
     }
 
-    update(hero: Gpio): Promise<Gpio> {
+    update(hero: GpioInterface): Promise<GpioInterface> {
         const url = `${this.gpiosUrl}/${hero.id}`;
         return this.http
-            .put(url, JSON.stringify(hero), { headers: this.headers })
+            .put(url, JSON.stringify(hero))
             .toPromise()
             .then(() => hero)
             .catch(this.handleError);

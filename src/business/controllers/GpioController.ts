@@ -112,6 +112,7 @@ export class GpioController {
         try {
             model.findAll(where)
                 .then((result: Array<GpioInstance>) => {
+                    //res.send({ data: result });
                     res.send(result);
                 })
                 .catch((error: Error) => {

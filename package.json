@@ -6,8 +6,9 @@
   "main": "dist/src/server.js",
   "angular-cli": {},
   "scripts": {
-    "build": "npm run build-static && npm run ts-build && npm run ts-lint",
+    "build": "npm run build-static && npm run ts-build",
     "build-static": "copyfiles config/*.json dist/src/ && copyfiles -u 1 dist-angular/*.ico dist-angular/*.html dist-angular/*.js dist/public",
+    "build-and-start": "ng build && npm run build && npm run start",
     "start": "node dist/src/server.js",
     "test": "mocha -r ts-node/register tests/**/*Test.ts",
     "ts-build": "tsc",
@@ -46,6 +47,7 @@
     "@angular/platform-browser": "^4.3.6",
     "@angular/platform-browser-dynamic": "^4.3.6",
     "@angular/router": "^4.3.6",
+    "angular-in-memory-web-api": "^0.4.6",
     "async": "^2.4.1",
     "body-parser": "^1.17.2",
     "chalk": "^1.1.3",

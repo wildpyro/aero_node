@@ -3,5 +3,6 @@ node_modules/
 .*/
 !/.gitignore
 tsconfig.json
-tsDist/
+dist/
+dist-angular/
 snippets
