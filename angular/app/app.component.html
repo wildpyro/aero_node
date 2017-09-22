@@ -1,17 +1,26 @@
-<div layout="column" flex>
-    <md-card>
-        <md-card-title>
-            <h1>{{title}}</h1>
-        </md-card-title>
-        <md-card-content>
-            <button md-icon-button [mdMenuTriggerFor]="appMenu">
-                <md-icon>more_vert</md-icon>
-            </button>
-            <md-menu #appMenu="mdMenu">
-                <a md-menu-item *ngFor="let menuOption of menuOptions" routerLink="/{{menuOption.route}}">{{menuOption.name}}</a>
-            </md-menu>
-        </md-card-content>
-    </md-card>
+<div class="md-padding title-card">
+    <div fxLayout="row wrap">
+        <div fxFlex="25%"></div>
+        <div fxFlex="50%">
+            <md-card>
+                <md-card-header>
+                    <md-card-title>
+                        <span class="md-headline">{{title}}</span>
+                        <span class="md-subhead">a controller for an aeropoincs scheduler</span>
+                    </md-card-title>
+                </md-card-header>
+                <md-card-content>
+                </md-card-content>
+                <md-card-actions>
+                    <md-menu #appMenu="mdMenu">
+                        <a md-menu-item *ngFor="let menuOption of menuOptions" routerLink="/{{menuOption.route}}">{{menuOption.name}}</a>
+                    </md-menu>
+                    <button md-icon-button [mdMenuTriggerFor]="appMenu">Menu</button>
+                </md-card-actions>
+            </md-card>
+            <div flex></div>
+        </div>
+        <div fxFlex="25%"></div>
+    </div>
 </div>
-
 <router-outlet></router-outlet>

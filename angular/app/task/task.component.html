@@ -1,3 +1,19 @@
-<p>
-  task works!
-</p>
+<div class="mat-elevation-z8">
+    <md-table #table [dataSource]="dataSource">
+
+        <div layout="column">
+            <ng-container flex="33" mdColumnDef="pin">
+                <md-header-cell *mdHeaderCellDef> Pin </md-header-cell>
+                <md-cell *mdCellDef="let element"> {{element.pin}} </md-cell>
+            </ng-container>
+
+            <ng-container flex="66" mdColumnDef="scheduleName">
+                <md-header-cell *mdHeaderCellDef> Schedule Name </md-header-cell>
+                <md-cell *mdCellDef="let element"> {{element.scheduleName}} </md-cell>
+            </ng-container>
+
+            <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+            <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+        </div>
+    </md-table>
+</div>

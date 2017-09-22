@@ -9,37 +9,35 @@
     </div>
 </div>
 -->
-<div class="mat-elevation-z8">
-    <md-table #table [dataSource]="dataSource">
 
-        <div layout="column">
-            <ng-container flex="33" mdColumnDef="pin">
-                <md-header-cell *mdHeaderCellDef> Pin </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.pin}} </md-cell>
-            </ng-container>
-
-            <ng-container flex="66" mdColumnDef="scheduleName">
-                <md-header-cell *mdHeaderCellDef> Schedule Name </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.scheduleName}} </md-cell>
-            </ng-container>
-
-            <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-            <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+<div fxLayout="row wrap">
+    <div fxFlex="25%"></div>
+    <div fxFlex="50%">
+        <div class="gpio-filter mat-elevation-z8">
+            <md-form-field floatPlaceholder="never">
+                <input mdInput #filter placeholder="Filter schedules">
+            </md-form-field>
         </div>
-    </md-table>
+
+        <div class="gpio-container mat-elevation-z8">
+            <md-table #table [dataSource]="dataSource" mdSort>
+                <div layout="column">
+                    <ng-container flex="33" mdColumnDef="pin">
+                        <md-header-cell *mdHeaderCellDef> Pin </md-header-cell>
+                        <md-cell *mdCellDef="let element"> {{element.pin}} </md-cell>
+                    </ng-container>
+
+                    <ng-container flex="66" mdColumnDef="scheduleName">
+                        <md-header-cell *mdHeaderCellDef> Schedule Name </md-header-cell>
+                        <md-cell *mdCellDef="let element"> {{element.scheduleName}} </md-cell>
+                    </ng-container>
+
+                    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+                    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+                </div>
+            </md-table>
+            <!--<md-paginator [length]="dataSource.dataLength()" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></md-paginator>-->
+        </div>
+    </div>
+    <div fxFlex="25%"></div>
 </div>
-<!--
-<table>
-    <thead>
-        <tr>
-            <td>Pin</td>
-            <td>Schedule</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let pin of pinList">
-            <td>{{pin.pin}}</td>
-            <td>{{pin.scheduleName}}</td>
-        </tr>
-    </tbody>
-</table>-->

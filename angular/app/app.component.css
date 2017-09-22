@@ -1,3 +1,28 @@
+.md-headline {
+	font-size: 350%;
+	text-align: center;
+    color: teal;
+}
+
+.md-subhead {
+    text-align: center;
+}
+
+.title-card {
+    margin-bottom: 20px;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    flex-grow: 1;
+    margin-left: 32px;
+}
+  
 .mat-table {
     overflow: auto;
+    max-height: 500px;
+}
+
+md-row:hover{
+    background-color: #f3f3f3;
 }

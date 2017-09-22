@@ -15,6 +15,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { GpioComponent } from './gpio/gpio.component';
 import { GpioService } from './gpio/gpio.service';
 import { GpioSearchComponent } from './gpio/gpio-search.component';
+import { GpioDetailComponent } from './gpio/gpio-detail.component';
 import { TaskComponent } from './task/task.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LandingComponent } from './landing/landing.component';
@@ -36,7 +37,8 @@ import { LandingComponent } from './landing/landing.component';
         TaskComponent,
         NotFoundComponent,
         LandingComponent,
-        GpioSearchComponent
+        GpioSearchComponent,
+        GpioDetailComponent
     ],
     providers: [], //inject global services/components if you want them here. Or put them in the individual component
     bootstrap: [AppComponent]

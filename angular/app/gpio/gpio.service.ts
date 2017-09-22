@@ -13,10 +13,16 @@ export class GpioService {
     constructor(private http: HttpClient) { }
 
     getGpios(): Promise<GpioInterface[]> {
-        return this.http.get(this.gpiosUrl)
+        /*return this.http.get(this.gpiosUrl)
             .toPromise()
             .then() //do something with it if we want
             .catch(this.handleError);
+        */
+        let fakeData: GpioInterface[] = [
+            { id: 1, pin: 1, scheduleName: 'test' }
+        ];
+
+        return new Promise(function (resolve: any, reject: any) { resolve(fakeData); });
     }
 
     getGpio(id: number): Promise<GpioInterface> {

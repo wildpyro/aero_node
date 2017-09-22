@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 
-import { Gpio } from './gpio.component.class';
+import { GpioInterface } from './gpio.component.class';
 
 @Injectable()
 export class GpioSearchService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  search(term: string): Observable<Gpio[]> {
+  search(term: string): Observable<GpioInterface[]> {
     return this.http
-      .get(`api/heroes/?name=${term}`)
-      .map(response => response.json().data as Gpio[]);
+      .get(`gpio/?scheduleName=${term}`)
+      .map(response => response as GpioInterface[]);
   }
 }

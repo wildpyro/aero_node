@@ -1,6 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdButtonModule, MdCheckboxModule, MdCardModule, MdMenuModule, MdIconModule, MdToolbarModule, MdTableModule } from '@angular/material';
+import {
+    MdButtonModule,
+    MdCheckboxModule,
+    MdCardModule,
+    MdMenuModule,
+    MdIconModule,
+    MdToolbarModule,
+    MdTableModule,
+    MdSortModule,
+    MdPaginatorModule,
+} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     imports: [
@@ -11,7 +22,10 @@ import { MdButtonModule, MdCheckboxModule, MdCardModule, MdMenuModule, MdIconMod
         MdMenuModule,
         MdIconModule,
         MdToolbarModule,
-        MdTableModule
+        MdTableModule,
+        MdSortModule,
+        MdPaginatorModule,
+        FlexLayoutModule
     ],
     exports: [
         MdButtonModule,
@@ -20,7 +34,10 @@ import { MdButtonModule, MdCheckboxModule, MdCardModule, MdMenuModule, MdIconMod
         MdMenuModule,
         MdIconModule,
         MdToolbarModule,
-        MdTableModule
+        MdTableModule,
+        MdSortModule,
+        MdPaginatorModule,
+        FlexLayoutModule
     ],
     declarations: []
 })

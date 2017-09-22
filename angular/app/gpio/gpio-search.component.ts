@@ -14,7 +14,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 
 import { GpioSearchService } from './gpio-search.service';
-import { Gpio } from './gpio.component.class';
+import { GpioInterface } from './gpio.component.class';
 
 @Component({
     selector: 'gpio-search',
@@ -23,7 +23,7 @@ import { Gpio } from './gpio.component.class';
     providers: [GpioSearchService]
 })
 export class GpioSearchComponent implements OnInit {
-    gpioes: Observable<Gpio[]>;
+    gpioes: Observable<GpioInterface[]>;
     private searchTerms = new Subject<string>();
 
     constructor(
@@ -43,15 +43,15 @@ export class GpioSearchComponent implements OnInit {
                 // return the http search observable
                 ? this.gpioSearchService.search(term)
                 // or the observable of empty gpioes if there was no search term
-                : Observable.of<Gpio[]>([]))
+                : Observable.of<GpioInterface[]>([]))
             .catch(error => {
                 // TODO: add real error handling
                 console.log(error);
-                return Observable.of<Gpio[]>([]);
+                return Observable.of<GpioInterface[]>([]);
             });
     }
 
-    gotoDetail(gpio: Gpio): void {
+    gotoDetail(gpio: GpioInterface): void {
         let link = ['/detail', gpio.id];
         this.router.navigate(link);
     }
