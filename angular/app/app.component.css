@@ -1,15 +1,27 @@
-.md-headline {
+.main-title {
 	font-size: 350%;
-	text-align: center;
     color: teal;
 }
 
-.md-subhead {
+.nav-icon {
+    font-size: 200%;
+}
+
+.main-subhead {
     text-align: center;
 }
 
-.title-card {
+.title-toolbar {
     margin-bottom: 20px;
+}
+
+.title-card {
+    margin-bottom: 50px;
+}
+
+.md-headline {
+    font-size: 200%;
+    color: teal;
 }
 
 .mat-form-field {

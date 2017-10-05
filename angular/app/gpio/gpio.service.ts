@@ -13,11 +13,13 @@ export class GpioService {
     constructor(private http: HttpClient) { }
 
     getGpios(): Promise<GpioInterface[]> {
-        /*return this.http.get(this.gpiosUrl)
+        /*
+        return this.http.get(this.gpiosUrl)
             .toPromise()
             .then() //do something with it if we want
             .catch(this.handleError);
         */
+
         let fakeData: GpioInterface[] = [
             { id: 1, pin: 1, scheduleName: 'test' }
         ];
@@ -49,12 +51,12 @@ export class GpioService {
             .catch(this.handleError);
     }
 
-    update(hero: GpioInterface): Promise<GpioInterface> {
-        const url = `${this.gpiosUrl}/${hero.id}`;
+    update(gpio: GpioInterface): Promise<GpioInterface> {
+        const url = `${this.gpiosUrl}/${gpio.id}`;
         return this.http
-            .put(url, JSON.stringify(hero))
+            .put(url, JSON.stringify(gpio))
             .toPromise()
-            .then(() => hero)
+            .then(() => gpio)
             .catch(this.handleError);
     }
 

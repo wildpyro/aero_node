@@ -6,22 +6,25 @@ import {
     MdCardModule,
     MdMenuModule,
     MdIconModule,
-    MdToolbarModule,
     MdTableModule,
+    MdToolbarModule,
+    MdTooltipModule,
     MdSortModule,
     MdPaginatorModule,
 } from '@angular/material';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     imports: [
         CommonModule,
         MdButtonModule,
-        MdCheckboxModule,
         MdCardModule,
-        MdMenuModule,
+        MdCheckboxModule,
         MdIconModule,
+        MdMenuModule,
         MdToolbarModule,
+        MdTooltipModule,
         MdTableModule,
         MdSortModule,
         MdPaginatorModule,
@@ -33,11 +36,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MdCardModule,
         MdMenuModule,
         MdIconModule,
-        MdToolbarModule,
         MdTableModule,
+        MdToolbarModule,
+        MdTooltipModule,
         MdSortModule,
         MdPaginatorModule,
-        FlexLayoutModule
+        FlexLayoutModule,
     ],
     declarations: []
 })

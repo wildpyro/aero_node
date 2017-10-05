@@ -1,35 +1,61 @@
-<!--
-<div id="search-component">
-    <h4>Pin Search</h4>
-    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-    <div>
-        <div *ngFor="let pin of pinList | async" (click)="gotoDetail(hero)" class="search-result">
-            {{pin.pin}} {{pin.scheduleName}}
-        </div>
-    </div>
-</div>
--->
+<section class="gpio-container" fxLayout="wrap">
+    <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+    <div fxFlex>
+        <section class="title-card">
+            <md-card>
+                <md-card-header>
+                    <md-card-title>
+                        <span class="md-headline">{{title}}</span>
+                    </md-card-title>
+                </md-card-header>
+            </md-card>
+        </section>
 
-<div fxLayout="row wrap">
-    <div fxFlex="25%"></div>
-    <div fxFlex="50%">
-        <div class="gpio-filter mat-elevation-z8">
-            <md-form-field floatPlaceholder="never">
+        <section class="gpio-filter mat-elevation-z8">
+            <md-form-field floatPlaceholder="always">
                 <input mdInput #filter placeholder="Filter schedules">
             </md-form-field>
-        </div>
+        </section>
 
-        <div class="gpio-container mat-elevation-z8">
+        <section gpio-detail class="mat-elevation-z8">
+            <div *ngIf="selectedPin">
+                <md-form-field floatPlaceholder="always">
+                    <label>Pin: </label>
+                    <input mdInput [(ngModel)]="selectedPin.pin" />
+                </md-form-field>
+                <md-form-field floatPlaceholder="never">
+                    <label>Assigned Schedule: </label>
+                    <input mdInput [(ngModel)]="selectedPin.scheduleName" />
+                </md-form-field>
+                <button md-button (click)="unset()">Cancel</button>
+                <button md-button (click)="update()">Save</button>
+            </div>
+        </section>
+
+        <section class="gpio-table mat-elevation-z1">
             <md-table #table [dataSource]="dataSource" mdSort>
                 <div layout="column">
-                    <ng-container flex="33" mdColumnDef="pin">
+                    <ng-container flex="25" mdColumnDef="pin">
                         <md-header-cell *mdHeaderCellDef> Pin </md-header-cell>
                         <md-cell *mdCellDef="let element"> {{element.pin}} </md-cell>
                     </ng-container>
 
-                    <ng-container flex="66" mdColumnDef="scheduleName">
+                    <ng-container flex="50" mdColumnDef="scheduleName">
                         <md-header-cell *mdHeaderCellDef> Schedule Name </md-header-cell>
                         <md-cell *mdCellDef="let element"> {{element.scheduleName}} </md-cell>
+                    </ng-container>
+
+                    <!--Add button options?-->
+                    <ng-container flex="25" mdColumnDef="buttons">
+                        <md-header-cell *mdHeaderCellDef> Options </md-header-cell>
+                        <md-cell *mdCellDef="let element">
+                            <md-button-toggle-group name="alignment">
+                                <md-button-toggle (click)="onSelect(element)">
+                                    <md-icon>format_align_left</md-icon>
+                                    <span>one</span>
+                                </md-button-toggle>
+                            </md-button-toggle-group>
+                        </md-cell>
                     </ng-container>
 
                     <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
@@ -37,7 +63,7 @@
                 </div>
             </md-table>
             <!--<md-paginator [length]="dataSource.dataLength()" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></md-paginator>-->
-        </div>
+        </section>
     </div>
-    <div fxFlex="25%"></div>
-</div>
+    <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+</section>

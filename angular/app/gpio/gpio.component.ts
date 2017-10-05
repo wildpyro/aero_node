@@ -5,26 +5,37 @@ import { Sort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import { GpioInterface, GpioCollection } from './gpio.component.class';
 import { GpioService } from './gpio.service';
 import { GpioDataSource } from './gpio-data-source';
 
 @Component({
-    selector: 'app-gpio',
+    selector: 'gpio',
     templateUrl: './gpio.component.html',
     styleUrls: ['./gpio.component.css'],
-    providers: [GpioService]
+    providers: [GpioService],
 })
 
 export class GpioComponent implements OnInit {
 
-    pinList: GpioInterface[];
-    selectedPin: GpioInterface;
+    //Header fields
+    title = 'List of IO Pins:';
 
+    tableOptions = [
+        { name: 'Remove Schedule', route: 'gpio-remove-schedule' }
+    ];
+
+    selectedPin: GpioInterface | null;
+
+    //Table fields
+    private pristine: GpioDataSource | null;
     dataSource: GpioDataSource | null;
-    sortedData: GpioDataSource | null;
-    displayedColumns = ['pin', 'scheduleName'];
+    //    sortedData: GpioDataSource | null;
+
+    displayedColumns = ['pin', 'scheduleName', 'buttons'];
     @ViewChild('filter') filter: ElementRef;
 
     constructor(
@@ -35,7 +46,10 @@ export class GpioComponent implements OnInit {
     getGPIOs(): void {
         this.gpioService
             .getGpios()
-            .then(result => this.dataSource = new GpioDataSource(new GpioCollection(result)));
+            .then(result => {
+                this.dataSource = new GpioDataSource(new GpioCollection(result));
+                this.pristine = new GpioDataSource(new GpioCollection(result));
+            });
     }
 
     add(name: string): void {
@@ -43,8 +57,9 @@ export class GpioComponent implements OnInit {
         if (!name) { return; }
         this.gpioService.create(name)
             .then(gpio => {
-                this.pinList.push(gpio);
-                this.selectedPin = null;
+                this.dataSource.data.data.push(gpio);
+                this.pristine.data.data.push(gpio);
+                this.unset();
             });
     }
 
@@ -52,9 +67,18 @@ export class GpioComponent implements OnInit {
         this.gpioService
             .delete(gpio.id)
             .then(() => {
-                this.pinList = this.pinList.filter(h => h !== gpio);
+                //this.dataSource.data.data = this.dataSource.data.data.filter(h => h !== gpio);
                 if (this.selectedPin === gpio) { this.selectedPin = null; }
             });
+    }
+
+    /**
+     * Send an update from the detail panel
+     */
+    update(): void {
+        console.log(this.selectedPin);
+        this.gpioService.update(this.selectedPin)
+            .then(() => this.unset);
     }
 
     ngOnInit(): void {
@@ -66,14 +90,30 @@ export class GpioComponent implements OnInit {
                 if (!this.dataSource) { return; }
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
+
+        //TODO remove once done testing.
+        //this.selectedPin = { id: 10, pin: 1, scheduleName: 'ben' };
     }
 
+    /**
+     * Set pin to one from table
+     * @param gpio
+     */
     onSelect(gpio: GpioInterface): void {
         this.selectedPin = gpio;
     }
 
-    gotoDetail(): void {
-        this.router.navigate(['/detail', this.selectedPin.id]);
+    /**
+     * Deselect the pin
+     */
+    unset() {
+        this.selectedPin = null;
+        //Reset the table?
+        this.dataSource.reset();
+        //this.dataSource = this.pristine;
+
+        //console.log(this.pristine);
+        //console.log(this.dataSource);
     }
 
     /*

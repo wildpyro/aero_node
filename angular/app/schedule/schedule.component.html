@@ -1,3 +1,22 @@
-<p>
-  schedule works!
-</p>
+<div class="md-padding title-card">
+    <div fxLayout="wrap">
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+        <div fxFlex>
+            <md-card>
+                <md-card-header>
+                    <md-card-title>
+                    </md-card-title>
+                </md-card-header>
+                <md-card-content>
+                </md-card-content>
+                <md-card-actions>
+                    <md-menu #appMenu="mdMenu">
+                        <a md-menu-item *ngFor="let menuOption of menuOptions" routerLink="/{{menuOption.route}}">{{menuOption.name}}</a>
+                    </md-menu>
+                    <button md-icon-button [mdMenuTriggerFor]="appMenu">Menu</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+    </div>
+</div>

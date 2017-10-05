@@ -109,8 +109,11 @@ export class GpioController {
             where = { pin: req.query.pin };
         }
 
+        //default order by
+        let orderby = [['pin']];
+
         try {
-            model.findAll(where)
+            model.findAll(where, orderby)
                 .then((result: Array<GpioInstance>) => {
                     //res.send({ data: result });
                     res.send(result);
