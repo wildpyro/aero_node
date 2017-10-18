@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Sort } from '@angular/material';
+import { Sort, MdDialog, MdDialogRef } from '@angular/material';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -11,6 +12,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { GpioInterface, GpioCollection } from './gpio.component.class';
 import { GpioService } from './gpio.service';
 import { GpioDataSource } from './gpio-data-source';
+import { DialogDeleteComponent } from '../core/dialog-delete.component';
 
 @Component({
     selector: 'gpio',
@@ -24,24 +26,31 @@ export class GpioComponent implements OnInit {
     //Header fields
     title = 'List of IO Pins:';
 
-    tableOptions = [
-        { name: 'Remove Schedule', route: 'gpio-remove-schedule' }
-    ];
+    //table filter
+    @ViewChild('filter') filter: ElementRef;
 
+    //Detail form
+    detailForm: FormGroup;
     selectedPin: GpioInterface | null;
 
     //Table fields
     private pristine: GpioDataSource | null;
     dataSource: GpioDataSource | null;
-    //    sortedData: GpioDataSource | null;
-
     displayedColumns = ['pin', 'scheduleName', 'buttons'];
-    @ViewChild('filter') filter: ElementRef;
+    //    sortedData: GpioDataSource | null;
 
     constructor(
         private gpioService: GpioService,
-        private router: Router
+        private router: Router,
+        public dialog: MdDialog
     ) { }
+
+    private createForm() {
+        this.detailForm = new FormGroup({
+            pin: new FormControl('', Validators.required), //convert to an array to add more validators ie Pattern
+            schedule: new FormControl('', Validators.required),
+        });
+    }
 
     getGPIOs(): void {
         this.gpioService
@@ -83,6 +92,7 @@ export class GpioComponent implements OnInit {
 
     ngOnInit(): void {
         this.getGPIOs();
+        this.createForm();
         Observable.fromEvent(this.filter.nativeElement, 'keyup')
             .debounceTime(150)
             .distinctUntilChanged()
@@ -95,12 +105,27 @@ export class GpioComponent implements OnInit {
         //this.selectedPin = { id: 10, pin: 1, scheduleName: 'ben' };
     }
 
+    openDeleteDialog(gpio: GpioInterface): void {
+        let dialogRef = this.dialog.open(DialogDeleteComponent, {});
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.delete(gpio);
+            }
+        });
+    }
+
     /**
      * Set pin to one from table
      * @param gpio
      */
     onSelect(gpio: GpioInterface): void {
-        this.selectedPin = gpio;
+        if (this.selectedPin) {
+            this.selectedPin = null;
+        }
+        else {
+            this.selectedPin = gpio;
+        }
     }
 
     /**
@@ -112,8 +137,6 @@ export class GpioComponent implements OnInit {
         this.dataSource.reset();
         //this.dataSource = this.pristine;
 
-        //console.log(this.pristine);
-        //console.log(this.dataSource);
     }
 
     /*

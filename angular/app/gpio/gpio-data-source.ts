@@ -33,6 +33,7 @@ export class GpioDataSource extends DataSource<any> {
             this._filterChange
         ];
 
+        //Monitor the data table for changes
         return Observable.merge(...displayDataChanges).map(() => {
             return this._data.data.slice().filter((item: GpioInterface) => {
                 let searchStr = (item.scheduleName).toLowerCase();

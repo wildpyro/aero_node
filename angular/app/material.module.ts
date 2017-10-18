@@ -11,7 +11,14 @@ import {
     MdTooltipModule,
     MdSortModule,
     MdPaginatorModule,
+    MdInputModule,
+    MdDialogModule,
 } from '@angular/material';
+
+import {
+    FormsModule,
+    ReactiveFormsModule,
+} from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -28,7 +35,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MdTableModule,
         MdSortModule,
         MdPaginatorModule,
-        FlexLayoutModule
+        MdInputModule,
+        FlexLayoutModule,
+        FormsModule,
+        MdDialogModule,
+        ReactiveFormsModule,
     ],
     exports: [
         MdButtonModule,
@@ -41,7 +52,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MdTooltipModule,
         MdSortModule,
         MdPaginatorModule,
+        MdInputModule,
         FlexLayoutModule,
+        FormsModule,
+        MdDialogModule,
+        ReactiveFormsModule,
     ],
     declarations: []
 })

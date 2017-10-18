@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { GpioComponent } from '../gpio/gpio.component';
 import { TaskComponent } from '../task/task.component';
-import { NotFoundComponent } from '../not-found/not-found.component';
+import { NotFoundComponent } from '../core/not-found.component';
 import { LandingComponent } from '../landing/landing.component';
 
 const routes: Routes = [
