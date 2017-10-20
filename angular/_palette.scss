@@ -1,0 +1,12 @@
+// _styles.scss
+@import '~@angular/material/theming';
+
+//Define global variables here
+$primary: teal;
+$primary-mat: $mat-teal;
+
+$accent: orange;
+$accent-mat: $mat-pink;
+
+$warn: red;
+$warn-mat: $mat-red;

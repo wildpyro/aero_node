@@ -2,11 +2,14 @@
     margin-bottom: 20px;
 }
 
-.title-card {
-    margin-bottom: 50px;
-}
-
 .main-title {
 	font-size: 350%;
-    color: teal;
+}
+
+.nav-icon {
+    font-size: 200%;
+}
+
+.main-subhead {
+    text-align: center;
 }

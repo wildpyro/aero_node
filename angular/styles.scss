@@ -1,0 +1,50 @@
+@import '_palette.scss';
+
+//Colours
+.colour-primary {
+    color: $primary;
+}
+
+.colour-accent {
+    color: $accent;
+}
+
+.colour-warn {
+    color: $warn;
+}
+
+//Components
+md-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+md-row:hover{
+    background-color: #f3f3f3;
+}
+
+md-card-title > p {
+    font-size: 200%;
+    text-align: center
+}
+
+md-card-content > p {
+    text-align: center
+}
+
+md-form-field {
+    font-size: 14px;
+    flex-grow: 1;
+    margin-left: 5px;
+}
+
+
+//Layout 
+.form-full-width {
+    width: 100%;
+}
+
+
+section{
+    margin-bottom: 15px;       
+}

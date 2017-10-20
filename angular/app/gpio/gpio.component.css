@@ -6,25 +6,3 @@
     font-size: 20px;
     margin-bottom: 20px;
 }
-
-.md-headline {
-    font-size: 200%;
-    color: teal;
-}
-
-.mat-table {
-    overflow: auto;
-    max-height: 500px;
-}
-
-md-row:hover{
-    background-color: #f3f3f3;
-}
-
-section{
-    margin-bottom: 15px;       
-}
-
-.form-full-width {
-    width: 100%;
-  }

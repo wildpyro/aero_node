@@ -1,14 +1,14 @@
 <md-card>
     <md-card-header>
         <md-card-title>
-            <span class="md-headline">Delete this</span>
+            <p class="colour-primary">Delete this</p>
         </md-card-title>
     </md-card-header>
     <md-card-content>
         <p>Are you sure?</p>
     </md-card-content>
     <md-card-actions>
-        <button type="button" md-raised-button (click)="dialogRef.close(true)">OK</button>
-        <button type="button" md-button (click)="dialogRef.close()">Cancel</button>
+        <button type="button" md-raised-button color="primary" (click)="dialogRef.close(true)">OK</button>
+        <button type="button" md-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
     </md-card-actions>
 </md-card>

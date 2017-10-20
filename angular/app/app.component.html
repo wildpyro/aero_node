@@ -3,12 +3,14 @@
         <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
         <div fxFlex>
             <md-toolbar>
-                <span class="main-title">{{title}}</span>
+                <span class="main-title colour-primary">{{title}}</span>
                 <span fxFlex></span>
                 <md-menu #appMenu="mdMenu">
                     <a md-menu-item *ngFor="let menuOption of menuOptions" routerLink="/{{menuOption.route}}">{{menuOption.name}}</a>
                 </md-menu>
-                <button md-icon-button [mdMenuTriggerFor]="appMenu"><md-icon class="nav-icon">home</md-icon></button>
+                <button md-icon-button [mdMenuTriggerFor]="appMenu">
+                    <md-icon class="nav-icon">home</md-icon>
+                </button>
 
                 <md-toolbar-row>
                     <span class="main-subhead">a controller for an aeropoincs scheduler</span>
