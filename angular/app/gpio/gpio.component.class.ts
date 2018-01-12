@@ -7,7 +7,6 @@ export interface GpioInterface {
 }
 
 export class GpioCollection {
-
     dataChange: BehaviorSubject<GpioInterface[]> = new BehaviorSubject<GpioInterface[]>([]);
     size: number;
     get data(): GpioInterface[] { return this.dataChange.value; }

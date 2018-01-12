@@ -1,9 +1,9 @@
 import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-    selector: '[gpioDetail]' //CSS class that triggers the directive
+    selector: '[taskDetail]' //CSS class that triggers the directive
 })
-export class GpioDetailDirective {
+export class TaskDetailDirective {
     @Output() close: EventEmitter<any> = new EventEmitter();
 
     @HostListener('document:keydown', ['$event'])

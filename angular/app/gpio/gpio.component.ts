@@ -47,7 +47,7 @@ export class GpioComponent implements OnInit {
 
     private createForm() {
         this.detailForm = new FormGroup({
-            pin: new FormControl('', Validators.required), //convert to an array to add more validators ie Pattern
+            pin: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}')]),
             schedule: new FormControl('', Validators.required),
         });
     }
@@ -100,19 +100,6 @@ export class GpioComponent implements OnInit {
                 if (!this.dataSource) { return; }
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
-
-        //TODO remove once done testing.
-        //this.selectedPin = { id: 10, pin: 1, scheduleName: 'ben' };
-    }
-
-    openDeleteDialog(gpio: GpioInterface): void {
-        let dialogRef = this.dialog.open(DialogDeleteComponent, {});
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.delete(gpio);
-            }
-        });
     }
 
     /**
@@ -128,6 +115,16 @@ export class GpioComponent implements OnInit {
         }
     }
 
+    openDeleteDialog(gpio: GpioInterface): void {
+        let dialogRef = this.dialog.open(DialogDeleteComponent, {});
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.delete(gpio);
+            }
+        });
+    }
+
     /**
      * Deselect the pin
      */
@@ -135,8 +132,6 @@ export class GpioComponent implements OnInit {
         this.selectedPin = null;
         //Reset the table?
         this.dataSource.reset();
-        //this.dataSource = this.pristine;
-
     }
 
     /*

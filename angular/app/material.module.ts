@@ -13,6 +13,7 @@ import {
     MdPaginatorModule,
     MdInputModule,
     MdDialogModule,
+    MdGridListModule,
 } from '@angular/material';
 
 import {
@@ -40,6 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FormsModule,
         MdDialogModule,
         ReactiveFormsModule,
+        MdGridListModule,
     ],
     exports: [
         MdButtonModule,
@@ -57,6 +59,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FormsModule,
         MdDialogModule,
         ReactiveFormsModule,
+        MdGridListModule,
     ],
     declarations: []
 })

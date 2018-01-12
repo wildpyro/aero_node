@@ -6,28 +6,25 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 
-import { GpioInterface, GpioCollection } from './gpio.component.class';
+import { TaskInterface, TaskCollection } from './task.component.class';
 
 /**
  * Renders and listens to a table
  */
-export class GpioDataSource extends DataSource<any> {
-
+export class TaskDataSource extends DataSource<any> {
     _filterChange = new BehaviorSubject('');
-    //_paginator: new MdPaginator();
     get filter(): string { return this._filterChange.value; }
     set filter(filter: string) { this._filterChange.next(filter); }
-    get data(): GpioCollection { return this._data; }
-    get dataLength(): number { return this._data.size; }
+    get data(): TaskCollection { return this._data; }
 
-    private pristine: GpioCollection;
+    private pristine: TaskCollection;
 
-    constructor(private _data: GpioCollection) {
+    constructor(private _data: TaskCollection) {
         super();
         this.pristine = _data;
     }
 
-    connect(): Observable<GpioInterface[]> {
+    connect(): Observable<TaskInterface[]> {
         const displayDataChanges = [
             this._data.dataChange,
             this._filterChange
@@ -35,8 +32,13 @@ export class GpioDataSource extends DataSource<any> {
 
         //Monitor the data table for changes
         return Observable.merge(...displayDataChanges).map(() => {
-            return this._data.data.slice().filter((item: GpioInterface) => {
-                let searchStr = (item.scheduleName).toLowerCase();
+            return this._data.data.slice().filter((item: TaskInterface) => {
+                let searchStr = (item.name).toLowerCase();
+
+                if (item.status) {
+                    searchStr = (item.status).toLowerCase();
+                }
+
                 return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
             });
         });

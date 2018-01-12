@@ -11,7 +11,7 @@
             </md-card>
         </section>
 
-        <section class="gpio-filter mat-elevation-z8">
+        <section class="gpio-filter mat-elevation-z2">
             <form>
                 <md-form-field floatPlaceholder="always">
                     <input mdInput #filter placeholder="Filter schedules">
@@ -19,36 +19,39 @@
             </form>
         </section>
 
-        <section gpio-detail id="detail" class="mat-elevation-z8">
-            <div align="center" *ngIf="selectedPin">
+        <section *ngIf="selectedPin" gpio-detail id="detail" fxLayout="wrap" class="mat-elevation-z2">
+            <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+            <div fxFlex>
                 <form [formGroup]="detailForm">
-                    <md-form-field>
+                    <md-form-field style="width: 100%">
                         <label>Pin: </label>
                         <input mdInput [(ngModel)]="selectedPin.pin" formControlName="pin" />
-                        <md-error *ngIf="detailForm.controls['pin'].errors && !detailForm.controls['pin'].pristine">
-                            Pin is
-                            <strong>required</strong>
+                        <md-error *ngIf="detailForm.controls['pin'].errors && detailForm.controls['pin'].errors.required && !detailForm.controls['pin'].pristine">
+                            Pin is required
+                        </md-error>
+                        <md-error *ngIf="detailForm.controls['pin'].errors && detailForm.controls['pin'].errors.pattern && !detailForm.controls['pin'].pristine">
+                            Pin must be no more than 2 digits
                         </md-error>
                     </md-form-field>
                     <p>
-                        <md-form-field>
+                        <md-form-field style="width: 100%">
                             <label>Assigned Schedule: </label>
                             <input mdInput [(ngModel)]="selectedPin.scheduleName" formControlName="schedule" />
                             <md-error *ngIf="detailForm.controls['schedule'].errors && !detailForm.controls['schedule'].pristine">
-                                Schedule is
-                                <strong>required</strong>
+                                Schedule is required
                             </md-error>
                         </md-form-field>
                     </p>
-                    <div>
+                    <div style="text-align: center">
                         <button md-button (click)="unset()">Cancel</button>
                         <button md-button (click)="update()">Save</button>
                     </div>
                 </form>
             </div>
+            <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
         </section>
 
-        <section class="gpio-table mat-elevation-z1">
+        <section class="gpio-table mat-elevation-z2">
             <md-table #table [dataSource]="dataSource" mdSort>
                 <div layout="column">
                     <ng-container flex="25" mdColumnDef="pin">
@@ -65,10 +68,10 @@
                         <md-header-cell *mdHeaderCellDef> Options </md-header-cell>
                         <md-cell *mdCellDef="let element">
                             <button md-button pageScroll href="#detail" (click)="onSelect(element)">
-                                <md-icon>format_align_left</md-icon>
+                                <md-icon class="colour-primary">format_align_left</md-icon>
                             </button>
                             <button md-button (click)="openDeleteDialog(element)">
-                                <md-icon>delete_forever</md-icon>
+                                <md-icon class="colour-warn">delete_forever</md-icon>
                             </button>
                         </md-cell>
                     </ng-container>

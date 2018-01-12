@@ -1,19 +1,143 @@
-<div class="mat-elevation-z8">
-    <md-table #table [dataSource]="dataSource">
+<section class="task-container">
+    <button md-button pageScroll href="#add" (click)="onAdd()">
+        <md-icon class="nav-icon colour-accent">add_circle_outline</md-icon>
+    </button>
 
-        <div layout="column">
-            <ng-container flex="33" mdColumnDef="pin">
-                <md-header-cell *mdHeaderCellDef> Pin </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.pin}} </md-cell>
-            </ng-container>
-
-            <ng-container flex="66" mdColumnDef="scheduleName">
-                <md-header-cell *mdHeaderCellDef> Schedule Name </md-header-cell>
-                <md-cell *mdCellDef="let element"> {{element.scheduleName}} </md-cell>
-            </ng-container>
-
-            <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-            <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    <section *ngIf="addNew" task-detail id="add" fxLayout="wrap">
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+        <div fxFlex class="mat-elevation-z1">
+            <form [formGroup]="detailAddForm">
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Name: </label>
+                        <input mdInput [(ngModel)]="task.name" formControlScheduleId="name" />
+                        <md-error *ngIf="detailForm.controls['name'].errors && detailForm.controls['name'].errors.required && !detailForm.controls['name'].pristine">
+                            Name is required
+                        </md-error>
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Schedule: </label>
+                        <input mdInput [(ngModel)]="task.scheduleId" formControlScheduleId="scheduleId" />
+                        <md-error *ngIf="detailForm.controls['scheduleId'].errors && detailForm.controls['scheduleId'].errors.required && !detailForm.controls['scheduleId'].pristine">
+                            ScheduleId is required
+                        </md-error>
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Status: </label>
+                        <input mdInput [(ngModel)]="task.status" formControlScheduleId="status" />
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Start Date: </label>
+                        <input mdInput [(ngModel)]="task.start" formControlScheduleId="start" />
+                        <md-error *ngIf="detailForm.controls['start'].errors && detailForm.controls['start'].errors.required && !detailForm.controls['start'].pristine">
+                            Start Date is required
+                        </md-error>
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>End Date: </label>
+                        <input mdInput [(ngModel)]="task.end" formControlScheduleId="end" />
+                    </md-form-field>
+                </p>
+                <div style="text-align: center">
+                    <button md-button (click)="unset()">Cancel</button>
+                    <button md-button (click)="update()">Save</button>
+                </div>
+            </form>
         </div>
-    </md-table>
-</div>
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+    </section>
+
+    <section *ngIf="task" task-detail id="detail" fxLayout="wrap" class="mat-elevation-z1">
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+        <div fxFlex>
+            <form [formGroup]="detailAddForm">
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Name: </label>
+                        <input mdInput [(ngModel)]="task.name" formControlScheduleId="name" />
+                        <md-error *ngIf="detailForm.controls['name'].errors && detailForm.controls['name'].errors.required && !detailForm.controls['name'].pristine">
+                            Name is required
+                        </md-error>
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Schedule: </label>
+                        <input mdInput [(ngModel)]="task.scheduleId" formControlScheduleId="scheduleId" />
+                        <md-error *ngIf="detailForm.controls['scheduleId'].errors && detailForm.controls['scheduleId'].errors.required && !detailForm.controls['scheduleId'].pristine">
+                            ScheduleId is required
+                        </md-error>
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Status: </label>
+                        <input mdInput [(ngModel)]="task.status" formControlScheduleId="status" />
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>Start Date: </label>
+                        <input mdInput [(ngModel)]="task.start" formControlScheduleId="start" />
+                        <md-error *ngIf="detailForm.controls['start'].errors && detailForm.controls['start'].errors.required && !detailForm.controls['start'].pristine">
+                            Start Date is required
+                        </md-error>
+                    </md-form-field>
+                </p>
+                <p>
+                    <md-form-field style="width: 100%">
+                        <label>End Date: </label>
+                        <input mdInput [(ngModel)]="task.end" formControlScheduleId="end" />
+                    </md-form-field>
+                </p>
+                <div style="text-align: center">
+                    <button md-button (click)="unset()">Cancel</button>
+                    <button md-button (click)="update()">Save</button>
+                </div>
+            </form>
+        </div>
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+    </section>
+
+    <section fxLayout class="task-details mat-elevation-z1">
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+        <div fxFlex>
+            <div *ngIf="tasks">
+                <md-grid-list cols="3">
+                    <md-grid-tile *ngFor="let task of tasks.data.data">
+                        <md-card class="task-card mat-elevation-z2">
+                            <md-card-header>
+                                <md-card-title>
+                                    <p class="colour-primary">{{task.name}}</p>
+                                </md-card-title>
+                            </md-card-header>
+                            <md-card-content>
+                                <p>Task Id: {{task.id}}</p>
+                                <p>Status: {{task.status}}</p>
+                                <p>Start: {{task.start}}</p>
+                                <p>End: {{task.end}}</p>
+                            </md-card-content>
+                            <md-card-actions style="text-align: center">
+                                <button md-button href="#detail" (click)="onSelect(task)">
+                                    <md-icon class="colour-primary">format_align_left</md-icon>
+                                </button>
+                                <button md-button (click)="openDeleteDialog(task)">
+                                    <md-icon class="colour-warn">delete_forever</md-icon>
+                                </button>
+                            </md-card-actions>
+                        </md-card>
+                    </md-grid-tile>
+                </md-grid-list>
+            </div>
+        </div>
+        <div fxFlex.gt-lg="25" fxFlex.gt-md="10" fxFlex="0"></div>
+    </section>
+</section>
